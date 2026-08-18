@@ -12,8 +12,12 @@ var (
 	definitions = map[string]Definition{}
 )
 
+func normalizeName(name string) string {
+	return strings.TrimSpace(name)
+}
+
 func Register(def Definition) error {
-	name := strings.TrimSpace(def.Name)
+	name := normalizeName(def.Name)
 	if name == "" {
 		return fmt.Errorf("tool definition requires a non-empty name")
 	}
@@ -53,4 +57,16 @@ func List() []Definition {
 		result = append(result, definitions[name])
 	}
 	return result
+}
+
+func Get(name string) (Definition, bool) {
+	mu.RLock()
+	defer mu.RUnlock()
+	def, ok := definitions[normalizeName(name)]
+	return def, ok
+}
+
+func Has(name string) bool {
+	_, ok := Get(name)
+	return ok
 }
