@@ -8,6 +8,7 @@ type Definition struct {
 	Description                    string
 	AdminOnly                      bool
 	RequiresInit                   bool
+	InitSchema                     map[string]interface{}
 	RequiresConfirmation           bool
 	StopOnFirstConfirmableToolCall bool
 	ConfirmationBlockMessage       string
