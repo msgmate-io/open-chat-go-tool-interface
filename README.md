@@ -11,7 +11,7 @@ Migration for existing tool-only subrepos:
 1. Keep your tool definitions in this module.
 2. Add an integration package that imports those definitions.
 3. Register them via `integrationinterface.Definition{ToolDefinitions: ...}`.
-4. Add that integration module to `backend/integrationdeps.json`.
+4. Add that integration module to `integrations.yaml`.
 
 ## Usage
 
