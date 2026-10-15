@@ -22,9 +22,14 @@ type Definition struct {
 	StopOnFirstConfirmableToolCall bool
 	ConfirmationBlockMessage       string
 	InputType                      interface{}
-	RequiredParams                 []string
-	Parameters                     map[string]interface{}
-	Run                            RunFunc
+	// InputSchema is the full JSON schema describing the call arguments, as
+	// exposed to the model. It is the stable counterpart of the core's
+	// (backend/api/msgmate/tools) ToolDefinition.InputSchema, so integrations can
+	// build callable tools without importing the core.
+	InputSchema    map[string]interface{}
+	RequiredParams []string
+	Parameters     map[string]interface{}
+	Run            RunFunc
 	// ResolveConfirmation, when set, overrides RequiresConfirmation at call
 	// time (code-defined, never user config).
 	ResolveConfirmation ConfirmationResolver
